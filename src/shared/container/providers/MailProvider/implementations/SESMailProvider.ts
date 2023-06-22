@@ -6,6 +6,9 @@ import { injectable } from "tsyringe";
 
 import { IMailProvider } from "../IMailProvider";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+
 @injectable()
 class SESMailProvider implements IMailProvider {
   private client: Transporter;
