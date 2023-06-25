@@ -10,14 +10,14 @@ import upload from "@config/upload";
 // import * as Tracing from "@sentry/tracing";
 import "@shared/container";
 import { AppError } from "@shared/errors/AppError";
-// import rateLimiter from "@shared/infra/http/middlewares/rateLimiter";
+import rateLimiter from "@shared/infra/http/middlewares/rateLimiter";
 
 import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
 
 const app = express();
 
-// app.use(rateLimiter);
+app.use(rateLimiter);
 
 // Sentry.init({
 //   dsn: process.env.SENTRY_DSN,
