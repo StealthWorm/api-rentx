@@ -17,7 +17,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 18.x
           
       - name: Install Dependencies
         run: yarn
@@ -33,6 +33,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }} 
           source: "., !node_modules"
           target: "~/app/api-rentx"
+          timeout: 120s
+          
+      - name: Clear tar.gz file residues
+        run: |
+          ssh ${SERVER_USERNAME}@${SERVER_HOST} "sudo find ~ -type f -name '*.tar.gz' -exec rm -f {} +"
           
       - name: Update API
         uses: appleboy/ssh-action@master
